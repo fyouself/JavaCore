@@ -133,78 +133,109 @@ public class Program {
 
 
     static boolean checkWinV2(char dot) {
+        //проверяем горизонтали
         for (int x = 0; x < fieldSizeX; x++) {
-            for (int y = 0; y < fieldSizeY; y++) {
+            for (int y = 0; y < fieldSizeY - WIN_COUNT + 1; y++) {
                 if (check1(x, y, dot)) return true;
-//                if(check2(x,y,dot)) return true;
-//                if(check3(x,y,dot)) return true;
-//                if(check4(x,y,dot)) return true;
             }
         }
+        //Проверяем вертикаль
+        for (int x = 0; x < fieldSizeX- WIN_COUNT + 1; x++) {
+            for (int y = 0; y < fieldSizeY ; y++) {
+                if (check2(x, y, dot)) return true;
+            }
+        }
+
+        //Проверяем горизонталь вправо вниз
+
+        for (int x = 0; x < fieldSizeX- WIN_COUNT + 1; x++) {
+            for (int y = 0; y < fieldSizeY - WIN_COUNT + 1; y++) {
+                if (check3(x, y, dot)) return true;
+            }
+        }
+
+        //Проверяем горизонталь вниз влево
+        for (int x = 0; x < fieldSizeX- WIN_COUNT + 1; x++) {
+            for (int y = fieldSizeY-1; y > 0 ; y--) {
+                if (check4(x, y, dot)) return true;
+            }
+        }
+
         return false;
     }
 
     static boolean check1(int x, int y, char dot) {
-        if (y + WIN_COUNT > fieldSizeY) return false;
 
-        for(int i = y; i < WIN_COUNT; i++){
-            if(field[x][i] != dot) {
-                return false;
-            }
+
+        boolean res = false;
+        int count = 0;
+        int max = 0;
+        for (int i = y; i < fieldSizeY; i++) {
+            if (field[x][i] == dot) {
+                count++;
+            } else count = 0;
+            if (count > max) max = count;
         }
 
+        if (max >= WIN_COUNT) res = true;
 
-        return true;
+        return res;
     }
 
 
     static boolean check2(int x, int y, char dot) {
-        if (x + WIN_COUNT > fieldSizeX) {
-            return false;
+        boolean res = false;
+        int count = 0;
+        int max = 0;
+        for (int i = x; i < fieldSizeX; i++) {
+            if (field[i][y] == dot) {
+                count++;
+            } else count = 0;
+            if (count > max) max = count;
         }
-        for (int i = x; i < WIN_COUNT; i++) {
-            if (field[i][y] != dot) {
-                return false;
-            }
-        }
-        System.out.println(2);
-        return true;
+
+        if (max >= WIN_COUNT) res = true;
+
+        return res;
     }
 
     static boolean check3(int x, int y, char dot) {
-        if (x + WIN_COUNT > fieldSizeX || y + WIN_COUNT >= fieldSizeY) {
-            return false;
-        }
 
+        boolean res = false;
+        int count = 0;
+        int max = 0;
         int j = y;
-
-        for (int i = x; i < WIN_COUNT; i++) {
-
-            if (field[i][j] != dot) {
-                return false;
-            }
-            j++;
+        for (int i = x; i < fieldSizeX; i++) {
+            if (field[i][j] == dot) {
+                count++;
+                j++;
+            } else count = 0;
+            if (count > max) max = count;
         }
-        System.out.println(3);
-        return true;
+
+        if (max >= WIN_COUNT) res = true;
+
+        return res;
+
     }
 
     static boolean check4(int x, int y, char dot) {
-        if (x - WIN_COUNT < 0 || y + WIN_COUNT > fieldSizeY) {
-            return false;
+        boolean res = false;
+        int count = 0;
+        int max = 0;
+        int j = y;
+        for (int i = x; i < fieldSizeX; i++) {
+            if (field[i][j] == dot) {
+                count++;
+                j--;
+            } else count = 0;
+            if (count > max) max = count;
         }
 
-        int j = x;
+        if (max >= WIN_COUNT) res = true;
 
-        for (int i = y; i < WIN_COUNT; i++) {
+        return res;
 
-            if (field[j][i] != dot) {
-                return false;
-            }
-            j--;
-        }
-        System.out.println(4);
-        return true;
     }
 
 
