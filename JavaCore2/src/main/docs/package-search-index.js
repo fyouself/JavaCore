@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.gb.core.lesson1"},{"l":"ru.gb.core.lesson1.models"},{"l":"ru.gb.core.lesson1.services"},{"l":"ru.gb.core.lesson1.task1"},{"l":"ru.gb.core.lesson1.task2"},{"l":"ru.gb.core.lesson1.utils"},{"l":"ru.gb.core.lesson2"}];updateSearchResults();
