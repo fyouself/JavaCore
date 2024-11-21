@@ -15,19 +15,17 @@ public class Program {
         for (int i = 0; i < employees.length; i++) {
             System.out.println(employees[i]);
         }
-        Arrays.sort(employees, new SortAge());
-        System.out.println();
-        System.out.println("SORT Age ");
+        Arrays.sort(employees);
 
         for (int i = 0; i < employees.length; i++) {
             System.out.println(employees[i]);
         }
-
-        System.out.println("SORT Salare ");
-        Arrays.sort(employees, new SortSalare());
-        for (int i = 0; i < employees.length; i++) {
-            System.out.println(employees[i]);
-
-        }
+//
+//        System.out.println("SORT Salare ");
+//        Arrays.sort(employees, new SortSalare());
+//        for (int i = 0; i < employees.length; i++) {
+//            System.out.println(employees[i]);
+//
+//        }
     }
 }
