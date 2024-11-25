@@ -1,7 +1,7 @@
 package ru.gb.core.lesson4.lesson.homework;
 
 public class IllegalArgumentException extends Exception{
-    int balance;
+    private  final int balance;
 
     public int getBalance() {
         return balance;
@@ -11,4 +11,5 @@ public class IllegalArgumentException extends Exception{
         super(message);
         this.balance = balance;
     }
+
 }
