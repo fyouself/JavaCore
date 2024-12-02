@@ -21,9 +21,32 @@ public class WorkWithFile {
 
 
     public static void main(String[] args) throws IOException {
-        writeFileContents("file1.txt", 30, 2);
-        writeFileContents("file2.txt", 30, 2);
-        concatenate("file1.txt", "file2.txt", "fileres.txt");
+//        writeFileContents("file1.txt", 30, 3);
+//        writeFileContents("file2.txt", 30, 0);
+//        concatenate("file1.txt", "file2.txt", "fileres.txt");
+//
+//        System.out.println(searchWord("file1.txt", TO_SEARCH));
+//        System.out.println(searchWord("file2.txt", TO_SEARCH));
+
+//        int count = 0;
+//        File path = new File(new File(".").getCanonicalPath());
+//        File[] dir = path.listFiles();
+//        for (int i = 0; i < dir.length; i++) {
+////            if (dir[i].isDirectory()) continue;
+//
+//            System.out.println(dir[i]);
+//        }
+        printContents(".");
+    }
+
+    static void printContents(String path) throws IOException {
+        int count = 0;
+        File fullPath = new File(new File(path).getCanonicalPath());
+        File[] dir = fullPath.listFiles();
+        for (int i = 0; i < dir.length; i++) {
+            if (dir[i].isDirectory()) printContents(dir[i].toString());
+            System.out.println(dir[i]);
+        }
     }
 
     /**
@@ -98,12 +121,26 @@ public class WorkWithFile {
         int len = search.length();
         byte[] bytes = search.getBytes();
         int i = 0;
-         try (FileInputStream fileInputStream = new FileInputStream(file)) {
+        int c;
+        try (FileInputStream fileInputStream = new FileInputStream(file)) {
 
-             if(bytes[i])
+            while ((c = fileInputStream.read()) != -1) {
+                if (c == bytes[i]) {
+                    i++;
+                } else {
+                    i = 0;
+                    if (c == bytes[i]) {
+                        i++;
+                    }
+                }
 
+                if (i == bytes.length - 1) {
+                    return true;
+                }
+            }
+            return false;
 
-         }
+        }
     }
 
 
